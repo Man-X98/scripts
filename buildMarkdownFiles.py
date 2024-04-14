@@ -25,7 +25,7 @@ for file in files:
         # build File:
         filename = file[:-2] + "pdf"
         command = "pandoc {} -o {}".format(file, filename)
-        subprocess.call(command, cwd=path, shell=True, executable="/bin/zsh")
+        subprocess.call(command, cwd=path, shell=True)# , executable="/bin/zsh")
         buildFiles.append("File Build: {} --> {}".format(file, filename))
         print(buildFiles[-1])
 
