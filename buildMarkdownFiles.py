@@ -1,16 +1,15 @@
 #!/bin/bash
 
-# Script builds markdown files in directory unsing pandoc
+# Script builds markdown files in directory using pandoc
 
 # IMPORTANT
-# Needs explicit path to pandoc executable
+# Pandoc has to be installed 
 
 import os
 import sys
 import subprocess
 
 path = os.getcwd()
-pandocPath = "/home/johannes/Downloads/pandoc-3.1/bin/pandoc"
 
 try:
     userArgs = sys.argv[1]
@@ -25,7 +24,7 @@ for file in files:
     if file[-3:] == ".md":
         # build File:
         filename = file[:-2] + "pdf"
-        command = "{} {} -o {}".format(pandocPath, file, filename)
+        command = "pandoc {} -o {}".format(file, filename)
         subprocess.call(command, cwd=path, shell=True, executable="/bin/zsh")
         buildFiles.append("File Build: {} --> {}".format(file, filename))
         print(buildFiles[-1])
