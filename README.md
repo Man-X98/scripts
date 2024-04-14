@@ -1,2 +1,2 @@
 # scripts
-Various small pzthon scripts making life easier. 
+Various small python scripts making life easier. 
