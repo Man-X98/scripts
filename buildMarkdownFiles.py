@@ -24,7 +24,7 @@ for file in files:
     if file[-3:] == ".md":
         # build File:
         filename = file[:-2] + "pdf"
-        command = "pandoc {} -o {}".format(file, filename)
+        command = "pandoc -f markdown-implicit_figures -t pdf {} -o {}".format(file, filename)
         subprocess.call(command, cwd=path, shell=True)# , executable="/bin/zsh")
         buildFiles.append("File Build: {} --> {}".format(file, filename))
         print(buildFiles[-1])
