@@ -1,15 +1,10 @@
 #!/bin/bash
-
+import os
 # Script builds markdown files in directory using pandoc
 
 # IMPORTANT
 # Pandoc has to be installed 
 
-# TODO
-# Check if markdown file was modified AFTER creation of PDF file
-# Only recompile if markdown file is newer than PDF file
-# Saves time in directory with a large number of markdown files
-# https://stackoverflow.com/questions/237079/how-do-i-get-file-creation-and-modification-date-times
 
 
 import os
@@ -29,8 +24,18 @@ files = os.listdir(path)
 buildFiles = []
 for file in files:
     if file[-3:] == ".md":
-        # build File:
         filename = file[:-2] + "pdf"
+
+        # Check if PDF is up to date with markdown
+        if filename in files:
+            timePDF = os.path.getmtime(path + "/" + filename)
+            timeMarkdown = os.path.getmtime(path + "/" + filename)
+            if timePDF > timeMarkdown:
+                # skip compilation if markdown is up to date
+                print("PDF for {} is up to date. Skipping compilation".format(filename))
+                continue
+
+        # Compile markdown file
         command = "pandoc -f markdown-implicit_figures -t pdf {} -o {}".format(file, filename)
         subprocess.call(command, cwd=path, shell=True)# , executable="/bin/zsh")
         buildFiles.append("File Build: {} --> {}".format(file, filename))
