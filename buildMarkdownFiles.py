@@ -5,6 +5,13 @@
 # IMPORTANT
 # Pandoc has to be installed 
 
+# TODO
+# Check if markdown file was modified AFTER creation of PDF file
+# Only recompile if markdown file is newer than PDF file
+# Saves time in directory with a large number of markdown files
+# https://stackoverflow.com/questions/237079/how-do-i-get-file-creation-and-modification-date-times
+
+
 import os
 import sys
 import subprocess
