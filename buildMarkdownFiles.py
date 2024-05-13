@@ -25,11 +25,10 @@ buildFiles = []
 for file in files:
     if file[-3:] == ".md":
         filename = file[:-2] + "pdf"
-
         # Check if PDF is up to date with markdown
         if filename in files:
             timePDF = os.path.getmtime(path + "/" + filename)
-            timeMarkdown = os.path.getmtime(path + "/" + filename)
+            timeMarkdown = os.path.getmtime(path + "/" + file)
             if timePDF > timeMarkdown:
                 # skip compilation if markdown is up to date
                 print("PDF for {} is up to date. Skipping compilation".format(filename))
